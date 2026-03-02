@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "types": ["vite/client"],
+    "allowJs": false,
+    "strict": true,
+    "noUnusedLocals": true,
+    "declaration": true,
+    "outDir": "dist",
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["vue"],
+  "exclude": ["node_modules"]
+}

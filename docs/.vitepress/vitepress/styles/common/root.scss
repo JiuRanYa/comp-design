@@ -1,0 +1,36 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: auto;
+}
+
+body {
+  margin: 0;
+  font-family: var(--bl-font-family-base);
+  color: var(--text-base);
+  background-color: var(--bg-color);
+  transition: var(--bl-transition-background);
+}
+
+ul {
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+code {
+  font-family: var(--bl-font-family-mono);
+  line-height: 2;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-link-base);
+  background-color: transparent;
+}

@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "jsx": "preserve",
+    "lib": ["esnext", "dom"],
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "paths": {
+      "@/*": ["./*"],
+      "@docs/*": ["./*"],
+      "arsenal-design": ["../components/index.ts"],
+      "@arsenal-design/*": ["../common/*/src"]
+    },
+    "resolveJsonModule": true,
+    "types": ["vite/client"],
+    "allowJs": false,
+    "strict": true,
+    "noUnusedLocals": true,
+    "importHelpers": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["**/*", "demos/**/*", ".vitepress/**/*", "../types.d.ts"]
+}

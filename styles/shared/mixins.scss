@@ -1,0 +1,83 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+
+@mixin inherit-basis {
+  font-family: inherit;
+  font-size: inherit;
+  font-variant-numeric: inherit;
+  line-height: inherit;
+}
+
+@mixin basis($inherit: true) {
+  & {
+    font-family: get-css-var('font-family-base');
+    font-size: get-css-var('font-size-base');
+    line-height: get-css-var('line-height-base');
+
+    // font-variant-numeric: tabular-nums;
+    color: get-css-var('content-color-base');
+  }
+
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  @if $inherit {
+    & {
+      &--inherit {
+        @include inherit-basis;
+      }
+    }
+  }
+}
+
+@mixin fixed {
+  position: fixed;
+  inset: 0;
+}
+
+@mixin inner-fixed {
+  position: absolute;
+  inset: 0;
+}
+
+@function to-css-var-name($name-units...) {
+  $name: '--al';
+
+  @each $unit in $name-units {
+    @if $unit != '' {
+      $name: $name + '-' + $unit;
+    }
+  }
+
+  @return $name;
+}
+
+@function get-css-var($name-units...) {
+  @return var(#{to-css-var-name($name-units...)});
+}
+
+@mixin define-css-var($name-units, $value) {
+  #{to-css-var-name($name-units...)}: #{$value};
+}
+
+@mixin define-preset-values($base-name, $style-map, $inspect: false) {
+  @each $name in map.keys($style-map) {
+    @include define-css-var(($base-name, $name),
+      if($inspect, #{meta.inspect(map.get($style-map, $name))}, map.get($style-map, $name)));
+  }
+}
+
+@mixin define-preset-style($base-name, $style-map) {
+  @each $name in map.keys($style-map) {
+    $style-units: map.get($style-map, $name);
+
+    @if list.length($style-units) != 0 {
+      @include define-css-var(($base-name, $name), get-css-var($style-units...));
+    }
+  }
+}

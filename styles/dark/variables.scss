@@ -1,0 +1,201 @@
+@use 'sass:map';
+@use 'sass:color';
+@use 'sass:math';
+
+@use '../shared/mixins.scss' as *;
+@use '../design/variables.scss' as c;
+
+$color-black: #fff !default;
+$color-white: #000 !default;
+
+$hsl-color-map: () !default;
+$hsl-color-map: map.deep-merge(
+	(
+    primary: (
+      base: (get-css-var(hsl-color-primary-base-h) get-css-var(hsl-color-primary-base-s) get-css-var(hsl-color-primary-base-l)),
+			base-h: 222,
+			base-s: 47%,
+			base-l: 100%,
+      foreground: (get-css-var(hsl-color-primary-foreground-h) get-css-var(hsl-color-primary-foreground-s) get-css-var(hsl-color-primary-foreground-l)),
+			foreground-h: 240,
+			foreground-s: 0%,
+			foreground-l: 16%,
+    ),
+    secondary: (
+      base: (get-css-var(hsl-color-secondary-base-h) get-css-var(hsl-color-secondary-base-s) get-css-var(hsl-color-secondary-base-l)),
+			base-h: 240,
+			base-s: 4.8%,
+			base-l: 20%,
+      foreground: (get-css-var(hsl-color-secondary-foreground-h) get-css-var(hsl-color-secondary-foreground-s) get-css-var(hsl-color-secondary-foreground-l)),
+			foreground-h: 222,
+			foreground-s: 47%,
+			foreground-l: 96%,
+    ),
+    success: (
+      base: (get-css-var(hsl-color-success-base-h) get-css-var(hsl-color-success-base-s) get-css-var(hsl-color-success-base-l)),
+			base-h: 114,
+			base-s: 57%,
+			base-l: 51%,
+      foreground: (get-css-var(hsl-color-success-foreground-h) get-css-var(hsl-color-success-foreground-s) get-css-var(hsl-color-success-foreground-l)),
+			foreground-h: 114,
+			foreground-s: 57%,
+			foreground-l: 51%,
+    ),
+    warning: (
+      base: (get-css-var(hsl-color-warning-base-h) get-css-var(hsl-color-warning-base-s) get-css-var(hsl-color-warning-base-l)),
+			base-h: 43,
+			base-s: 100%,
+			base-l: 65%,
+    ),
+    error: (
+      // base: 355 100% 62%,
+      base: (get-css-var(hsl-color-error-base-h) get-css-var(hsl-color-error-base-s) get-css-var(hsl-color-error-base-l)),
+			base-h: 345,
+			base-s: 100%,
+			base-l: 62%,
+    )
+	),
+	$hsl-color-map
+);
+
+// colors-session
+$color-map: () !default;
+$color-map: map.deep-merge(
+  (
+    primary: (
+      base: hsl(get-css-var(hsl-color-primary-base)),
+			hover: hsl(get-css-var(hsl-color-primary-base) / 80%),
+      text: #005fdb,
+      foreground: hsl(get-css-var(hsl-color-primary-foreground)),
+      bg: rgba(79, 68, 224, 6%)
+    ),
+    secondary: (
+      base: hsl(get-css-var(hsl-color-secondary-base)),
+			hover: hsl(get-css-var(hsl-color-secondary-base) / 80%),
+      foreground: hsl(get-css-var(hsl-color-secondary-foreground)),
+    ),
+    success: (
+      base: hsla(get-css-var(hsl-color-success-base-h), get-css-var(hsl-color-success-base-s), get-css-var(hsl-color-success-base-l), 15%),
+      hover: hsla(get-css-var(hsl-color-success-base-h), get-css-var(hsl-color-success-base-s), get-css-var(hsl-color-success-base-l), 10%),
+      foreground: hsl(get-css-var(hsl-color-success-base)),
+    ),
+    warning: (
+      base: hsla(44deg, 100%, 50%, 80%),
+			hover: hsl(get-css-var(hsl-color-warning-base) / 80%),
+			foreground: hsl(0deg 0% 98%),
+    ),
+    error: (
+      base: hsl(get-css-var(hsl-color-error-base)),
+      hover: hsl(get-css-var(hsl-color-error-base) / 80%),
+			foreground: hsl(0deg 0% 98%),
+    )
+  ),
+  $color-map
+);
+$content-color-map: () !default;
+$content-color-map: map.merge(
+  (
+    primary: rgba(#fff, 0.94),
+    base: rgba(235, 244, 255, 90%),
+    secondary: rgba(217, 232, 252, 69%),
+    disabled: rgba(#fff, 0.4),
+    placeholder: rgba(#fff, 0.3),
+    humble: rgba(#fff, 0.5),
+    reverse: #000
+  ),
+  $content-color-map
+);
+
+$bg-color-map: () !default;
+$bg-color-map: map.merge((base: #1f2023, reverse: #fff, black: #131719), $bg-color-map);
+
+$color-black: #fff !default;
+$color-white: #000 !default;
+
+$border-color-map: () !default;
+$border-color-map: map.merge(
+  (
+    base: rgba(#fff, 0.25),
+    light-1: rgba(#fff, 0.2),
+    light-2: rgba(#fff, 0.15),
+    dark-1: rgba(#fff, 0.3),
+    dark-2: rgba(#fff, 0.35)
+  ),
+  $border-color-map
+);
+
+$fill-color-map: () !default;
+$fill-color-map: map.merge(
+  (
+    base: rgba(#fff, 0.06),
+    secondary: rgba(#fff, 0.46),
+    third: (rgba(#fff, 0.36)),
+    disabled: rgba(#fff, 0.28),
+    hover: rgba(#fff, 0.16),
+    humble: rgba(#fff, 0.12),
+    background: rgba(#fff, 0.06),
+    reverse: #fff
+  ),
+  $fill-color-map
+);
+
+$shadow-color-map: () !default;
+$shadow-color-map: map.merge(
+  (
+    base: rgba(#000, 0.7),
+    light-1: rgba(#000, 0.6),
+    light-2: rgba(#000, 0.5),
+    dark-1: rgba(#000, 0.8),
+    dark-2: rgba(#000, 0.9)
+  ),
+  $shadow-color-map
+);
+$input-hover-bg: hsl(240deg 4.8% 20%) !default;
+
+@mixin define-level-colors($type, $max-level, $mode, $mixed-color) {
+  @for $i from 1 through $max-level {
+    $color-map: map.deep-merge(
+      (
+        $type: (
+          '#{$mode}-#{$i}':
+            color.mix(
+              $mixed-color,
+              map.get($color-map, $type, 'base'),
+              math.percentage(math.div($i, 10))
+            )
+        )
+      ),
+      $color-map
+    ) !global;
+  }
+}
+
+@mixin define-type-color($type) {
+  $colors: map.get($color-map, $type);
+
+  @each $name in map.keys($colors) {
+    @include define-css-var(('color', $type, $name), map.get($colors, $name));
+  }
+}
+
+@mixin define-base-color($type) {
+  $colors: map.get($hsl-color-map, $type);
+
+  @each $name in map.keys($colors) {
+    @include define-css-var(('hsl-color', $type, $name), map.get($colors, $name));
+  }
+}
+
+@mixin define-opacity-colors($type, $max-level) {
+  @for $i from 1 through $max-level {
+    $color-map: map.deep-merge(
+      (
+        $type: (
+          'opacity-#{$i}':
+            rgba(map.get($color-map, $type, 'base'), math.percentage(math.div(10 - $i, 10)))
+        )
+      ),
+      $color-map
+    ) !global;
+  }
+}

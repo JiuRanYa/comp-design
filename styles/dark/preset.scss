@@ -1,0 +1,36 @@
+@use 'sass:map';
+
+@use '../shared/mixins.scss' as *;
+@use './variables.scss' as *;
+@use '../design/variables.scss' as c;
+
+:root.dark {
+  color-scheme: dark;
+
+  @each $type in c.$types {
+    @include define-base-color($type);
+    @include define-type-color($type);
+  }
+
+  @mixin define-type-color($type) {
+    $colors: map.get($color-map, $type);
+
+    @each $name in map.keys($colors) {
+      @include define-css-var(('color', $type, $name), map.get($colors, $name));
+    }
+  }
+
+  @each $type in c.$types {
+    @include define-type-color($type);
+  }
+
+  @include define-preset-values('content-color', $content-color-map);
+  @include define-preset-values('bg-color', $bg-color-map);
+  @include define-preset-values('border-color', $border-color-map);
+  @include define-preset-values('fill-color', $fill-color-map);
+  @include define-preset-values('shadow-color', $shadow-color-map);
+
+  @include define-css-var('input-hover-bg', $input-hover-bg);
+  @include define-css-var('color-white', $color-white);
+  @include define-css-var('color-black', $color-black);
+}

@@ -1,0 +1,117 @@
+@use 'sass:map';
+@use 'sass:color';
+@use 'sass:math';
+
+@use '../shared/mixins.scss' as *;
+
+$namespace: 'al' !default;
+
+$types: primary, error;
+
+$color-black: #000 !default;
+$color-white: #fff !default;
+
+$bg-color-map: () !default;
+$bg-color-map: map.merge(
+  (
+    base: rgb(255, 255, 255),
+    reverse: #131719,
+    black:#131719
+  ),
+  $bg-color-map
+);
+$color-map: () !default;
+$color-map: map.deep-merge(
+  (
+    primary: (
+      7: #002D8E,
+      base: #0A4BC7,
+      5: #316BD2,
+      3: #84B0E9
+    ),
+    error: (
+      7: #C92B30,
+      base: #F44645,
+      5: #F56964,
+      3: #FAAEA5
+    )
+  ),
+  $color-map
+);
+
+$fill-color-map: () !default;
+$fill-color-map: map.merge(
+  (
+    base: #fff,
+  ),
+  $fill-color-map
+);
+
+$input-height-map: () !default;
+$input-height-map: map.merge(
+  (
+    middle: 32px,
+    small: 28px,
+    large: 36px,
+    mini: 24px,
+  ),
+  $input-height-map
+);
+
+$radius-map: () !default;
+$radius-map: map.merge(
+  (
+    base: 2px,
+  ),
+  $radius-map
+);
+
+$font-size-map: () !default;
+$font-size-map: map.merge(
+  (
+    base: 14px,
+    small: 12px,
+    large: 16px,
+  ),
+  $font-size-map
+);
+
+@mixin define-level-colors($type, $max-level, $mode, $mixed-color) {
+  @for $i from 1 through $max-level {
+    $color-map: map.deep-merge(
+      (
+        $type: (
+          '#{$mode}-#{$i}':
+            color.mix(
+              $mixed-color,
+              map.get($color-map, $type, 'base'),
+              math.percentage(math.div($i, 10))
+            )
+        )
+      ),
+      $color-map
+    ) !global;
+  }
+}
+
+@mixin define-opacity-colors($type, $max-level) {
+  @for $i from 1 through $max-level {
+    $color-map: map.deep-merge(
+      (
+        $type: (
+          'opacity-#{$i}':
+            rgba(map.get($color-map, $type, 'base'), math.percentage(math.div(10 - $i, 10)))
+        )
+      ),
+      $color-map
+    ) !global;
+  }
+}
+
+@mixin define-type-color($type) {
+  $colors: map.get($color-map, $type);
+
+  @each $name in map.keys($colors) {
+    @include define-css-var(('color', $type, $name), map.get($colors, $name));
+  }
+}

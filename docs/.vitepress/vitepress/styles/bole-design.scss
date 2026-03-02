@@ -1,0 +1,8 @@
+@forward '@arsenal-design/styles/index.scss' with (
+  $content-color-map: (
+    base: #5e6278
+  ),
+  $color-map: (
+    ()
+  )
+);

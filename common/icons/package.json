@@ -1,0 +1,59 @@
+{
+  "name": "@arsenal-design/icons",
+  "type": "module",
+  "version": "1.0.4",
+  "description": "Arsenal Design icons monorepo",
+  "author": "Tong Siyuan",
+  "license": "MIT",
+  "sideEffects": [
+    "dist/*"
+  ],
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.mjs",
+      "require": "./lib/index.js"
+    },
+    "./es": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.mjs"
+    },
+    "./lib": {
+      "types": "./types/index.d.ts",
+      "require": "./lib/index.js"
+    },
+    "./es/*.mjs": "./es/*.mjs",
+    "./es/*": "./es/*.mjs",
+    "./lib/*.js": "./lib/*.js",
+    "./lib/*": "./lib/*.js",
+    "./package.json": "./package.json",
+    "./*": "./*"
+  },
+  "main": "lib/index.js",
+  "module": "es/index.mjs",
+  "types": "./types/index.d.ts",
+  "files": [
+    "dist",
+    "es",
+    "lib",
+    "types",
+    "vue"
+  ],
+  "scripts": {
+    "build": "tsx scripts/build.ts"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.25"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.23",
+    "@types/prettier": "^2.7.1",
+    "@vitejs/plugin-vue": "^6.0.3",
+    "execa": "^6.1.0",
+    "fast-glob": "^3.2.12",
+    "fs-extra": "^10.1.0",
+    "kolorist": "^1.6.0",
+    "prettier": "^2.7.1",
+    "vite": "^6.4.1"
+  }
+}

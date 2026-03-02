@@ -1,0 +1,11 @@
+{
+  "extends": "../docs/tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["../*"],
+      "arsenal-design": ["../index"]
+    },
+    "types": ["vite/client"]
+  },
+  "include": ["*.vue", "*.ts", "global.d.ts", "../types.d.ts"]
+}

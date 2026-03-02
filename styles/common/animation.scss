@@ -1,0 +1,18 @@
+@use '../shared' as *;
+@use '../design' as *;
+
+@keyframes border-flash {
+  0% {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  50% {
+    border-color: get-css-var(color-primary-base);
+  }
+
+  100% {
+    background: transparent;
+    border-color: transparent;
+  }
+}

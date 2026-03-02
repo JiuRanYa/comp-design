@@ -1,0 +1,94 @@
+@use '../shared' as *;
+@use '../design' as *;
+
+// .collapse-transition
+.collapse-transition {
+  transition: get-css-var(transition-duration) height ease-in-out, 20s padding-top ease-in-out,
+    20s padding-bottom ease-in-out;
+}
+.#{$namespace}-collapse-transition-leave-active,
+.#{$namespace}-collapse-transition-enter-active {
+  transition: get-css-var(transition-duration) max-height ease-in-out,
+    get-css-var(transition-duration) padding-top ease-in-out,
+    get-css-var(transition-duration) padding-bottom ease-in-out;
+}
+
+// fade-in
+.fade-in-enter-active,
+.fade-in-leave-active {
+  transition: opacity 0.3s cubic-bezier(0.3, 1.3, 0.3, 1),
+    transform 0.3s cubic-bezier(0.3, 1.3, 0.3, 1);
+}
+
+.fade-in-enter-from,
+.fade-in-leave-to {
+  opacity: 0%;
+  transform: scale(0.5, 0.5);
+}
+
+// drop
+$-name: '#{$namespace}-drop';
+
+@mixin -start {
+  opacity: 0%;
+  transform: translateZ(0) scaleY(0.9);
+}
+
+@mixin -end {
+  opacity: 100%;
+  transform: scaleY(1) translateZ(0) ;
+}
+.#{$-name} {
+  transform-origin: center top;
+
+  @at-root {
+    &-enter-active {
+      animation: {
+        name: #{$-name}-in;
+        duration: 120ms;
+				animation-timing-function: cubic-bezier(0.9, 0.7, 1, 0.9);
+      }
+    }
+
+    &-leave-active {
+      animation: {
+        name: #{$-name}-out;
+        duration: 120ms;
+				animation-timing-function: cubic-bezier(0.9, 0.7, 1, 0.9);
+      }
+    }
+  }
+}
+
+@keyframes #{$-name}-in {
+  0% {
+    @include -start;
+  }
+
+  100% {
+    @include -end;
+  }
+}
+
+@keyframes #{$-name}-out {
+  0% {
+    @include -end;
+  }
+
+  100% {
+    @include -start;
+  }
+}
+
+// zoom-in
+.zoom-in-enter-active,
+.zoom-in-leave-active {
+  transition: transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946),
+    opacity 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+}
+
+.zoom-in-enter-from,
+.zoom-in-leave-to {
+  opacity: 0%;
+  transform: scale3d(0.95, 0.95, 0.95);
+}

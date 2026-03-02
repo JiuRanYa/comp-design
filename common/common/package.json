@@ -1,0 +1,10 @@
+{
+  "name": "@arsenal-design/common",
+  "version": "1.0.5",
+  "author": "Tong Siyuan",
+  "license": "MIT",
+  "main": "index.ts",
+  "dependencies": {
+    "lucide-vue-next": "^0.395.0"
+  }
+}
